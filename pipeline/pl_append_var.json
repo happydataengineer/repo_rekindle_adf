@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Set variable1",
+				"name": "Set variable_v1",
 				"type": "SetVariable",
 				"dependsOn": [],
 				"policy": {
@@ -21,7 +21,7 @@
 				"type": "AppendVariable",
 				"dependsOn": [
 					{
-						"activity": "Set variable1",
+						"activity": "Set variable_v1",
 						"dependencyConditions": [
 							"Succeeded"
 						]
