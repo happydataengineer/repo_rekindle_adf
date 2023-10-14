@@ -1,0 +1,61 @@
+{
+	"name": "pl_filter_foreach",
+	"properties": {
+		"activities": [
+			{
+				"name": "Filter1",
+				"type": "Filter",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@variables('sub')",
+						"type": "Expression"
+					},
+					"condition": {
+						"value": "@not(equals(item(),'Maths'))",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@variables('sub')",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Wait1",
+							"type": "Wait",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"waitTimeInSeconds": 1
+							}
+						}
+					]
+				}
+			}
+		],
+		"variables": {
+			"sub": {
+				"type": "Array",
+				"defaultValue": [
+					"Maths",
+					"Science",
+					"SST",
+					"Arts",
+					"PoliticalScience"
+				]
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-10-07T03:50:58Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

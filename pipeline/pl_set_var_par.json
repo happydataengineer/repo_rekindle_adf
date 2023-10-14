@@ -1,0 +1,38 @@
+{
+	"name": "pl_set_var_par",
+	"properties": {
+		"activities": [
+			{
+				"name": "env_details",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "getEnvDetails",
+					"value": {
+						"value": "@pipeline().parameters.env",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"env": {
+				"type": "string",
+				"defaultValue": "dev"
+			}
+		},
+		"variables": {
+			"getEnvDetails": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-10-01T03:45:26Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

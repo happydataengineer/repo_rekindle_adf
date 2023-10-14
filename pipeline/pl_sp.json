@@ -1,0 +1,70 @@
+{
+	"name": "pl_sp",
+	"properties": {
+		"activities": [
+			{
+				"name": "Stored procedure1",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[sp_get_emp_details1]",
+					"storedProcedureParameters": {
+						"emp_name": {
+							"value": "madhu",
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Web1",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Stored procedure1",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://prod-92.eastus.logic.azure.com:443/workflows/5906dcf8015948bc90cad00677ece868/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=H2CyS7O8V8gvOaOUCRThT6_6meHqSfQOtcGmfTUxrdE",
+					"method": "POST",
+					"body": {
+						"value": "\n{\"recipient\":\"@{pipeline().parameters.email_list}\",\"error\":\"@{activity('Stored procedure1').error.Message}\",\"dataFactoryName\":\"@{pipeline().DataFactory}\",\"pipelineName\":\"@{pipeline().Pipeline}\"}",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"email_list": {
+				"type": "string",
+				"defaultValue": "ashish.999reddy@gmail.com;madhu.analytics27@outlook.com;depikashree88@gmail.com"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-10-08T04:23:09Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

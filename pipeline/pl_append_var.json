@@ -1,0 +1,85 @@
+{
+	"name": "pl_append_var",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Subject",
+					"value": "Science"
+				}
+			},
+			{
+				"name": "Append variable1",
+				"type": "AppendVariable",
+				"dependsOn": [
+					{
+						"activity": "Set variable1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Total Subject",
+					"value": {
+						"value": "@variables('Subject')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set variable2",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Append variable1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "FinalSubjectList",
+					"value": {
+						"value": "@variables('Total Subject')",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"Subject": {
+				"type": "String",
+				"defaultValue": "Math"
+			},
+			"Total Subject": {
+				"type": "Array",
+				"defaultValue": [
+					"Hindi",
+					"SST",
+					"CS"
+				]
+			},
+			"FinalSubjectList": {
+				"type": "Array"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-10-07T02:09:54Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

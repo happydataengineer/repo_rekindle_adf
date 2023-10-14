@@ -1,0 +1,9 @@
+{
+	"name": "rktech-adf",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "753a9d8f-372a-4c2b-b602-aeedeb42a9a2",
+		"tenantId": "0086f128-a4d5-4551-ba4c-a0829dabdff3"
+	}
+}
